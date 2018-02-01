@@ -5,14 +5,14 @@
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, user-scalable=0"/>
 	<link rel="stylesheet" type="text/css" href="assets/css/style_adm.css"/>
-	<!--<script type="text/javascript" src="assets/js/adm.js"></script>-->
+	<script type="text/javascript" src="assets/js/adm.js"></script>
 </head>
 <body>
-	<aside>
+	<aside id='sidebar'>
 		<section class="user_field">
 			
 		</section>
-		<nav class="sidebar">
+		<nav class="content_sidebar">
 			
 		</nav>
 	</aside>
