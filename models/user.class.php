@@ -1,5 +1,4 @@
 <?php
-require_once "validateUser.class.php";
 
 /**
 * Classe responsavel por fazer alterações necessarias na tabela users.
@@ -9,7 +8,7 @@ require_once "validateUser.class.php";
 * @version 1.0 
 * @example Classe User 
 */
-class User{
+class User extends model{
 	//propriedades do usuario.
 
 	/**
