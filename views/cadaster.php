@@ -28,6 +28,10 @@
 					<label for="password">Senha</label>
 					<input type="password" name="password" class="form-control" id="password" required="required"/>
 				</div>
+				<div class="form-group">
+					<label for="photograph">Foto</label>
+					<input type="file" class="form-control-file" id="photograph" name="photograph"/>
+				</div>
 				<button type="submit" class="btn btn-primary btn-block btn-lg">Cadastrar</button>
 			</form>
 		</div>

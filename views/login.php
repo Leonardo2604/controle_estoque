@@ -11,6 +11,21 @@
 			<div class="title-form">
 				<h1>Login</h1>
 			</div>
+			<?php if($error == 1): ?>
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				Email e/ou senha estão errados.
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<?php elseif($error == 2):?>
+			<div class="alert alert-danger alert-dismissible fade show" role="alert">
+				Por favor preencha todos os campos.
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<?php endif; ?>
 			<form method="POST">
 				<div class="form-group">
 					<label for="email">E-mail</label>
@@ -20,7 +35,7 @@
 					<label for="password">Senha</label>
 					<input type="password" name="password" class="form-control" id="password" required="required"/>
 				</div>
-				<button type="submit" class="btn btn-primary btn-block btn-lg">Entrar</button>
+				<button type="submit" name="send" class="btn btn-primary btn-block btn-lg">Entrar</button>
 			</form>
 		</div>
 	</div>
