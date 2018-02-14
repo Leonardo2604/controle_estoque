@@ -10,23 +10,52 @@ class userController extends controller{
 
 	public function login(){
 		$dados = array();
-
+		$captcha = new captchaController();
+		$captcha->index();
 		$error = 0;
+		if(!isset($_SESSION['attempts'])){
+			$_SESSION['attempts'] = 0;
+		}
 		if(isset($_POST['send'])){
 			if(isset($_POST['email'], $_POST['password']) && !empty($_POST['email']) && !empty($_POST['password'])){
 				$email = addslashes($_POST['email']);
 				$password = md5(addslashes($_POST['password']));
 				$u = new User();
-				if($u->login($email, $password)){
-					header('Location: '.BASE_URL);
+
+				if($_SESSION['attempts'] > 2){
+					if(isset($_POST['cod']) && !empty($_POST['cod'])){
+						$cod = $_POST['cod'];
+						$captcha_code = explode(" ", $_SESSION['captcha']);
+						$captcha_code = implode("", $captcha_code);
+						if($cod == $captcha_code){
+							if($u->login($email, $password)){
+								header('Location: '.BASE_URL);
+								unset($_SESSION['attempts']);
+							}else{
+								$_SESSION['attempts'] += 1;
+								$error = 1;		
+							}
+						}else{
+							$error = 3;
+						}
+
+						$captcha->changeCaptcha();
+					}else{
+						$error = 4;
+					}
 				}else{
-					$error = 1;		
+					if($u->login($email, $password)){
+						header('Location: '.BASE_URL);
+						unset($_SESSION['attempts']);
+					}else{
+						$_SESSION['attempts'] += 1;
+						$error = 1;		
+					}
 				}
 			}else{
 				$error = 2;
 			}
 		}
-
 		$dados['error'] = $error;
 		$this->loadView('login', $dados);
 	}
