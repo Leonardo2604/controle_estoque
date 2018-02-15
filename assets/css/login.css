@@ -6,3 +6,14 @@
 .title-form{
 	margin-bottom: 20px;
 }
+.input-captcha{
+	position: relative;
+}
+.icon{
+	width: 32px;
+	height: 32px;
+	background-image: url('');
+	position: absolute;
+	right: 10px;
+	top: 3px;
+}

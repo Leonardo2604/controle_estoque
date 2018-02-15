@@ -4,6 +4,7 @@
 	<title>Login</title>
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>assets/css/login.css"/>
+	<script src="<?php echo BASE_URL; ?>assets/js/login.js"></script>
 </head>
 <body>
 	<div class="mx-auto custom-container border border-secundary rounded">
@@ -51,7 +52,10 @@
 			<?php if($_SESSION['attempts'] > 2): ?>
 			<div class="form-group">
 				<img src="<?php echo BASE_URL.'views/captcha.php'; ?>" class="mx-auto mb-4 d-block" height="100"/>
-				<input type="text" name="cod" class="form-control"/>
+				<div class="input-captcha">
+					<input type="text" name="cod" class="form-control" data-captcha="<?php echo $captcha; ?>" onkeyup="checkCaptcha(this)"/>
+					<div class="icon"></div>
+				</div>
 				<p class="text-center">
 					<a href="<?php echo BASE_URL.'captcha/changeCaptchaByLink'; ?>" />Trocar código</a>
 				</p>

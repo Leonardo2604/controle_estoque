@@ -13,6 +13,9 @@ class userController extends controller{
 		$captcha = new captchaController();
 		$captcha->index();
 		$error = 0;
+		$captcha_code = explode(" ", $_SESSION['captcha']);
+		$captcha_code = implode("", $captcha_code);
+
 		if(!isset($_SESSION['attempts'])){
 			$_SESSION['attempts'] = 0;
 		}
@@ -25,8 +28,6 @@ class userController extends controller{
 				if($_SESSION['attempts'] > 2){
 					if(isset($_POST['cod']) && !empty($_POST['cod'])){
 						$cod = $_POST['cod'];
-						$captcha_code = explode(" ", $_SESSION['captcha']);
-						$captcha_code = implode("", $captcha_code);
 						if($cod == $captcha_code){
 							if($u->login($email, $password)){
 								header('Location: '.BASE_URL);
@@ -57,6 +58,7 @@ class userController extends controller{
 			}
 		}
 		$dados['error'] = $error;
+		$dados['captcha'] = $captcha_code;
 		$this->loadView('login', $dados);
 	}
 
