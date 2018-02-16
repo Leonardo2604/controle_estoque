@@ -116,7 +116,7 @@ class User extends model{
 	*
 	* @access public
 	*/
-	public function save( $id, $photograph, $name, $telephone, $email, $password){
+	public function save($photograph, $name, $telephone, $email, $password, $id = 0){
 		if($id == 0){
 			//criando um novo usuario.
 			$sql = $this->db->prepare("INSERT INTO `users` 
@@ -186,6 +186,61 @@ class User extends model{
 		}else{
 			return false;
 		}
+	}
+
+	/**
+	* Função responsavel por salvar a imagem enviada pelo usuario
+	*
+	* @access public
+	* @param $imgInfo(array) contém as informações da imagem enviada
+	* @return true caso consiga salvar a imagem
+	* @return false caso não consiga salvar a imagem ou a imagem sejá de um tipo não permitido. 
+	*/
+	public function saveImage($imgInfo){
+		$typesAllowed = array('image/jpeg', 'image/jpg', 'image/png');
+		if(in_array($imgInfo['type'], $typesAllowed)){
+			move_uploaded_file($imgInfo['tmp_name'], 'assets/images/users/'.$imgInfo['name']);
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	/**
+	* Função responsavel por atualizar a imagem deixando-a com 
+	* um aspecto ratio 1
+	*
+	* @access public
+	* @param $name(string) nome da imagem
+	* @param $src(string) tipo da imagem
+	* @param $width(int) largura da imagem
+	* @param $height(int) altura da imagem
+	* @param $positionX(int) posição x para começa o corte.
+	* @param $positionY(int) posição y para começa o corte.
+	*/
+	public function updateImg($name, $type, $width, $height, $positionX, $positionY){
+		$path = 'assets/images/users/'.$name;
+
+		switch ($type) {
+			case 'image/jpeg':
+				$img = imagecreatefromjpeg($path);
+				break;
+			case 'image/png':
+				$img = imagecreatefrompng($path);
+				break;
+		}
+
+		$new = imagecreatetruecolor($width, $height);
+
+		if($type == 'image/png'){
+			imagecolortransparent($new, imagecolorallocatealpha($new, 0, 0, 0, 127));
+			imagealphablending($new, false);
+			imagesavealpha($new, true);
+		}
+
+		imagecopyresampled($new, $img, 0, 0, $positionX, $positionY, $width, $height, $width, $height);
+
+		imagejpeg($new, $path, 80);
 	}
 }
 ?>

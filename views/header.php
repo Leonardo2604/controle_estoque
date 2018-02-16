@@ -32,7 +32,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <img src="<?php echo BASE_URL.'assets/images/users/'.$userInf['photograph']; ?>" alt="<?php echo $userInfo['name']; ?>" class="rounded-circle">
+                <img src="<?php echo BASE_URL.'assets/images/users/'.$userInfo['photograph']; ?>" alt="<?php echo $userInfo['name']; ?>" class="rounded-circle" width="40"/>
             </li>
         </ul>
     </div>
