@@ -189,21 +189,56 @@ class User extends model{
 	}
 
 	/**
-	* Função responsavel por salvar a imagem enviada pelo usuario
+	* Função responsavel por salvar uma imagem 32 x 32 padrão para o usuario
+	* com base na primeira letra do seu nome;
 	*
 	* @access public
-	* @param $imgInfo(array) contém as informações da imagem enviada
+	* @param $name(string) contém o nome do usuário
 	* @return true caso consiga salvar a imagem
 	* @return false caso não consiga salvar a imagem ou a imagem sejá de um tipo não permitido. 
 	*/
-	public function saveImage($imgInfo){
-		$typesAllowed = array('image/jpeg', 'image/jpg', 'image/png');
-		if(in_array($imgInfo['type'], $typesAllowed)){
-			move_uploaded_file($imgInfo['tmp_name'], 'assets/images/users/'.$imgInfo['name']);
-			return true;
+	public function generateImage($name, $nameImage){
+		ucfirst($name);
+		$firstLetter = $name[0];
+
+		$image = imagecreate(32, 32);
+		$path = 'assets/images/users/'.$nameImage;
+
+		$r = rand(0, 200);
+		$g = rand(0, 200);
+		$b = rand(0, 200);
+
+		/* 
+			W = 6
+			A, B, C, D, E, G, H, N, O, R, S, U, V, Y = 9
+			F, J, K, L, P, T, Z = 10
+			I = 13
+			M, Q = 8
+		*/
+
+		$group1 = array('A', 'B', 'C', 'D', 'E', 'G', 'H', 'N', 'O', 'R', 'S', 'U', 'V', 'Y');
+		$group2 = array('F', 'J', 'K', 'L', 'P', 'T', 'Z');
+		$group3 = array('M', 'Q');
+
+		if(in_array($firstLetter, $group1)){
+			$positionXForLetter = 9;
+		}elseif(in_array($firstLetter, $group2)){
+			$positionXForLetter = 10;
+		}elseif (in_array($firstLetter, $group3)) {
+			$positionXForLetter = 8;
+		}elseif ($firstLetter == 'W') {
+			$positionXForLetter = 6;
 		}else{
-			return false;
+			$positionXForLetter = 13;
 		}
+
+
+		imagecolorallocate($image, $r, $g, $b);
+		      
+		$fontcolor = imagecolorallocate($image, 255, 255, 255);
+		imagettftext($image, 16, 0, $positionXForLetter, 23, $fontcolor, 'assets/fonts/Arial.ttf', $firstLetter);
+
+		imagejpeg($image, $path, 100);
 	}
 
 	/**
