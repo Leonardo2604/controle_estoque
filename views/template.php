@@ -18,19 +18,20 @@
 		}
 		?>
 	</header>
-	<section class="row">
-		<aside class="col-2">
-
+	<section class="row content">
+		<aside class="col-2 sidebar">
+		<?php $this->loadView('sideBar'); ?>
 		</aside>
 		<main class="col">
 			<?php $this->loadViewInTemplate($viewName, $viewData); ?>
+			<footer>
+				Copyright <i class="far fa-copyright"></i> 2018 - Leonardo Rangel dos Santos.
+			</footer>
 		</main>
 	</section>
-	<footer>
-		...
-	</footer>
 	<script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/jquery-3.3.1.min.js"/></script>
 	<script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/popper.min.js"/></script>
 	<script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/bootstrap.min.js"/></script>
+	<script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/template.js"/></script>
 </body>
 </html>
