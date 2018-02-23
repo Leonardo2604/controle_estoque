@@ -198,7 +198,11 @@ class User extends model{
 	* @return false caso não consiga salvar a imagem ou a imagem sejá de um tipo não permitido. 
 	*/
 	public function generateImage($name, $nameImage){
+		// retira qualquer espaço que tiver no inicio da string.
+		$name = ltrim($name);  
+		//deixa a primeira letra de uma string maiuscula.
 		ucfirst($name);
+		
 		$firstLetter = $name[0];
 
 		$image = imagecreate(32, 32);

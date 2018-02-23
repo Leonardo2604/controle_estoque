@@ -14,19 +14,23 @@
 		<form method="POST" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="name">Nome</label>
-				<input type="text" name="name" class="form-control" id="name" required="required" />
+				<input type="text" name="name" class="form-control" id="name" pattern="^[^\d]+$" required="required"/>
+				<small id="nameHelp" class="form-text text-muted"></small>
 			</div>
 			<div class="form-group">
 				<label for="tel">Telefone</label>
-				<input type="text" name="tel" class="form-control" id="tel" required="required" />
+				<input type="text" name="tel" class="form-control" id="tel" pattern="^\((\d{2})\)[\s-]?\d{4}\-\d{4}$" required="required"/>
+				<small id="telHelp" class="form-text text-muted"></small>
 			</div>
 			<div class="form-group">
 				<label for="email">E-mail</label>
-				<input type="email" name="email" class="form-control" id="email" required="required" />
+				<input type="email" name="email" class="form-control" id="email" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="required" />
+				<small id="emailHelp" class="form-text text-muted"></small>
 			</div>
 			<div class="form-group">
 				<label for="password">Senha</label>
 				<input type="password" name="password" class="form-control" id="password" required="required"/>
+				<small id="passwordHelp" class="form-text text-muted"></small>
 			</div>
 			<button type="submit" name="sendData" class="btn btn-secondary btn-block btn-lg">Cadastrar</button>
 		</form>
