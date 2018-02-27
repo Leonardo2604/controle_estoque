@@ -5,6 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>assets/css/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL; ?>assets/css/login.css"/>
 	<link rel="stylesheet" href="http://jcrop-cdn.tapmodo.com/v2.0.0-RC1/css/Jcrop.css" type="text/css">
+	<script type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/mask.js"></script>
+	<script defer type="text/javascript" src="<?php echo BASE_URL; ?>assets/js/cadaster.js"></script>
 </head>
 <body>
 	<div class="mx-auto custom-container">
@@ -19,7 +21,7 @@
 			</div>
 			<div class="form-group">
 				<label for="tel">Telefone</label>
-				<input type="text" name="tel" class="form-control" id="tel" pattern="^\((\d{2})\)[\s-]?\d{4}\-\d{4}$" required="required"/>
+				<input type="text" name="tel" class="form-control" id="tel" pattern="^\(\d{2}\)[\s-]?\d{4}[\s-]?-[\s-]?\d{4}$" required="required"/>
 				<small id="telHelp" class="form-text text-muted"></small>
 			</div>
 			<div class="form-group">
